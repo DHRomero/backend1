@@ -27,19 +27,18 @@ export class ProductsManager{
         return producto
     }
 
-    static async addProducts(producto={}){
-        let productos= await this.getProducts()
-        let id=1
-        if(productos.length>0){
-            id=Math.max(...productos.map(d=>d.id))+1
-        }
-        
-        let nuevoProducto ={id, ...producto}
-        productos.push (nuevoProducto)
+    static async addProducts(){
+       const producto = await this.getProducts();
+       const nuevoProducto=
+       {
+        id: producto.length ? producto[producto.lengh -1].id +1:1,
+        products:[]
+       };
 
-        await this.#grabarArchivo(JSON.stringify(productos, null, 5))
+       producto.push(nuevoProducto);
 
-        return nuevoProducto
+       await this.#grabarArchivo(JSON.stringify(producto,null,4));
+       return nuevoProducto
     }
 
     static async modificarProducto (id, modificaciones= {}){
