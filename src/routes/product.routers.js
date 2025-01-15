@@ -54,7 +54,7 @@ router.post ("/", async (req, res)=>{
         Description,
         Code,
         Price,
-        Status=true,
+        Status,
         Stock,
         Category,
     }=req.body
